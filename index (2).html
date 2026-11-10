@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROGRESS ELECTRIC SERVICE - ระบบคำนวณราคาและใบเสนอราคา</title>
+    <style>
+        :root {
+            --primary-color: #0284c7;
+            --accent-color: #38bdf8;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --border-color: #334155;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
+        .app-header {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+        }
+        .logo-img {
+            max-width: 140px;
+            height: auto;
+            border-radius: 50%;
+            border: 3px solid var(--accent-color);
+            margin-bottom: 15px;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+        }
+        .app-header h1 {
+            color: #ffffff;
+            margin: 10px 0 5px 0;
+            font-size: 22px;
+            letter-spacing: 1px;
+        }
+        .badge-emergency {
+            display: inline-block;
+            background: #ef4444;
+            color: white;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 20px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: var(--card-bg);
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+        }
+        h3 {
+            color: var(--accent-color);
+            margin-top: 0;
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            background: #0f172a;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+            color: #fff;
+        }
+        input:focus {
+            border-color: var(--accent-color);
+            outline: none;
+        }
+        button {
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+            transition: opacity 0.2s;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        .result-box {
+            background: #0f172a;
+            border: 1px solid var(--border-color);
+            padding: 16px;
+            border-radius: 6px;
+            margin-top: 20px;
+        }
+        .history-list {
+            margin-top: 20px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 16px;
+        }
+        .history-item {
+            background: #0f172a;
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="app-header">
+        <img src="logo.jpg" alt="PROGRESS ELECTRIC SERVICE Logo" class="logo-img">
+        <div>
+            <span class="badge-emergency">EMERGENCY 24 HOUR</span>
+        </div>
+        <h1>PROGRESS ELECTRIC SERVICE</h1>
+        <p style="color: #94a3b8; font-size: 14px; margin: 5px 0 0 0;">ระบบคำนวณราคาและออกใบเสนอราคา งานบริการไฟฟ้า ประปา ตกแต่งภายใน</p>
+    </header>
+
+<div class="container">
+    <h3>🛠️ กรอกข้อมูลประเมินราคา</h3>
+    
+    <div class="form-group">
+        <label for="clientName">ชื่อลูกค้า / โครงการ:</label>
+        <input type="text" id="clientName" placeholder="เช่น คุณเกลลี่ (งานระบบไฟฟ้า)">
+    </div>
+
+    <div class="form-group">
+        <label for="materialCost">ต้นทุนค่าวัสดุและอุปกรณ์ (บาท):</label>
+        <input type="number" id="materialCost" placeholder="0" value="0">
+    </div>
+
+    <div class="form-group">
+        <label for="laborCost">ต้นทุนค่าแรงช่าง (บาท):</label>
+        <input type="number" id="laborCost" placeholder="0" value="0">
+    </div>
+
+    <div class="form-group">
+        <label for="otherCost">ค่าใช้จ่ายอื่นๆ (ค่าเดินทาง ฯลฯ) (บาท):</label>
+        <input type="number" id="otherCost" placeholder="0" value="0">
+    </div>
+
+    <div class="form-group">
+        <label for="profitMargin">กำไรที่ต้องการ (%):</label>
+        <input type="number" id="profitMargin" placeholder="20" value="20">
+    </div>
+
+    <button onclick="calculateAndSave()">คำนวณและบันทึกใบเสนอราคา</button>
+
+    <div class="result-box" id="resultArea" style="display: none;">
+        <h3>📄 สรุปใบเสนอราคา</h3>
+        <p id="resClient"></p>
+        <p id="resTotalCost"></p>
+        <p id="resProfit"></p>
+        <p id="resFinalPrice" style="font-size: 18px; font-weight: bold; color: #4ade80;"></p>
+    </div>
+
+    <div class="history-list">
+        <h3>📋 ประวัติใบเสนอราคาที่บันทึกไว้</h3>
+        <div id="historyContainer" style="color: #94a3b8;">ยังไม่มีประวัติการบันทึก</div>
+    </div>
+</div>
+
+<script>
+    window.onload = loadHistory;
+
+    function calculateAndSave() {
+        const clientName = document.getElementById('clientName').value || 'ไม่ระบุชื่อ';
+        const material = parseFloat(document.getElementById('materialCost').value) || 0;
+        const labor = parseFloat(document.getElementById('laborCost').value) || 0;
+        const other = parseFloat(document.getElementById('otherCost').value) || 0;
+        const margin = parseFloat(document.getElementById('profitMargin').value) || 0;
+
+        const totalCost = material + labor + other;
+        const profitAmount = totalCost * (margin / 100);
+        const finalPrice = totalCost + profitAmount;
+
+        document.getElementById('resultArea').style.display = 'block';
+        document.getElementById('resClient').innerText = `ลูกค้า: ${clientName}`;
+        document.getElementById('resTotalCost').innerText = `ต้นทุนรวมทั้งหมด: ${totalCost.toLocaleString()} บาท`;
+        document.getElementById('resProfit').innerText = `กำไรที่ได้ (${margin}%): ${profitAmount.toLocaleString()} บาท`;
+        document.getElementById('resFinalPrice').innerText = `ราคาเสนอขายสุทธิ: ${finalPrice.toLocaleString()} บาท`;
+
+        const record = {
+            client: clientName,
+            price: finalPrice.toLocaleString(),
+            date: new Date().toLocaleDateString('th-TH')
+        };
+
+        let history = JSON.parse(localStorage.getItem('quoteHistory_progress')) || [];
+        history.unshift(record);
+        localStorage.setItem('quoteHistory_progress', JSON.stringify(history));
+
+        loadHistory();
+    }
+
+    function loadHistory() {
+        const historyContainer = document.getElementById('historyContainer');
+        let history = JSON.parse(localStorage.getItem('quoteHistory_progress')) || [];
+
+        if (history.length === 0) {
+            historyContainer.innerHTML = 'ยังไม่มีประวัติการบันทึก';
+            return;
+        }
+
+        let html = '';
+        history.forEach((item) => {
+            html += `<div class="history-item"><b>${item.client}</b> - ราคา: <span style="color: #4ade80;">${item.price} บาท</span> <span style="float: right; color: #94a3b8; font-size: 12px;">${item.date}</span></div>`;
+        });
+        historyContainer.innerHTML = html;
+    }
+</script>
+
+</body>
+</html>
